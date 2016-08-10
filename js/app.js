@@ -26,7 +26,7 @@ $(document).ready(function(){
   	$("a.close").click(function(){
   		$(".overlay").fadeOut(1000);
   	});
-});
+
   // When the page loads, JavaScript should start a new game. Since you'll need to be able to start a new game when the user clicks the "New Game" button, you'll want to create a newGame function that does everything necessary to start a new game.
     function newGame() {
       feedBack.text('Make your Guess!');
@@ -145,7 +145,7 @@ $(document).ready(function(){
       count.text(guessCount);
     }
 
-
+});
 
 
 
