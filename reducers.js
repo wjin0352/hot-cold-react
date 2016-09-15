@@ -2,8 +2,13 @@ import actions from './actions';
 import { combineReducers } from 'redux';
 
 const initialState = {
-  guess_count: 0,
-  guess_array: []
+  currentGame: {
+    targetNumber: null,
+    guess_array: []
+  },
+  games: [
+    {}
+  ]
 };
 
 // state represents what state was last time the reducer was called. (old state)
@@ -11,10 +16,10 @@ const initialState = {
 // so you are always getting the old state and creating a new object with the new state given and returning it to the user.
 const guessCountReducer = function(state, action) {
   console.log(state, action);
-  state = state || initialState.guess_count;
+  state = state || initialState.guess_array.length;
   switch(action.type) {
     case 'GUESS_COUNT':
-      const increment_count = state;
+      const increment_count = action.guess_array.length;
       return increment_count + 1;
   default:
     return state;
@@ -25,13 +30,18 @@ const guessArrayReducer = function(state, action) {
   state = state || initialState.guess_array;
   switch(action.type) {
     case 'GUESS_ARRAY':
-      return state.concat({
-        guess_array: action.guess_array;
-      }});
+      return state.concat(action.guess_array);
   default:
     return state;
   }
 }
+
+const targetNumberReducer = function (state, action) {
+  state = state || initialState.targetNumber;
+  switch()
+}
+
+
 
 // const guessListReducer = function (state, action) {
 //   state = state || initialState.guess_list;
