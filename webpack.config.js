@@ -4,21 +4,24 @@ var packageData = require('./package.json');
 var filename = [packageData.name, packageData.version, 'js'];
 
 module.exports = {
-  entry: path.resolve(__dirname, packageData.main),
+  entry: {
+    'react': './client.js'
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: filename.join('.')
+    filename: "[name].js",
   },
   watch: true,
   devtool: 'source-map',
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /(node_modules)/,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
+          plugins: ['transform-object-rest-spread']
         }
       }
     ]

@@ -1,10 +1,12 @@
-import actions from './actions';
+import * as actions from './actions';
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 const initialState = {
   currentGame: {
     targetNumber: null,
-    guess_array: []
+    guess_array: [],
+    msg: ''
   },
   games: [
     {}
@@ -15,8 +17,7 @@ const initialState = {
 // so state has the last known state, and action contains and represents the newest state
 // so you are always getting the old state and creating a new object with the new state given and returning it to the user.
 const guessCountReducer = function(state, action) {
-  console.log(state, action);
-  state = state || initialState.guess_array.length;
+  state = state || initialState.currentGame.guess_array.length;
   switch(action.type) {
     case 'GUESS_COUNT':
       const increment_count = action.guess_array.length;
@@ -27,7 +28,7 @@ const guessCountReducer = function(state, action) {
 }
 
 const guessArrayReducer = function(state, action) {
-  state = state || initialState.guess_array;
+  state = state || initialState.currentGame.guess_array;
   switch(action.type) {
     case 'GUESS_ARRAY':
       return state.concat(action.guess_array);
@@ -37,36 +38,41 @@ const guessArrayReducer = function(state, action) {
 }
 
 const targetNumberReducer = function (state, action) {
-  state = state || initialState.targetNumber;
-  switch()
+  state = state || initialState.currentGame.targetNumber;
+  switch(action.type) {
+    case 'TARGET_NUMBER':
+      const new_target = action.targetNumber;
+      return new_target;
+  default:
+    return state;
+  }
 }
 
 
-
-// const guessListReducer = function (state, action) {
-//   state = state || initialState.guess_list;
-//   switch (action.type) {
-//     case 'GUESS_LIST':
-//       if (action.type === actions.GUESS_LIST) {
-//         return state.concat({
-            // action.guess_list
-          // })
-//       }
-//   default:
-//     return state;
-//   }
-// };
-
-
-exports.guessCountReducer = guessCountReducer;
-exports.guessArrayReducer = guessArrayReducer;
-
-// exports.guessListReducer = guessListReducer;
+const newGameReducer = function (state, action) {
+  state = state || initialState.currentGame;
+  switch(action.type) {
+    case 'NEW_GAME':
+      const result = Object.assign({}, {
+        targetNumber: null,
+        guess_array: [],
+        msg: 'Starting New Game!'});
+        return result;
+  default:
+    return state;
+  }
+}
 
 // combine all reducers into one
+// we include routing, to take care of changing routes on the site
 const allReducers = combineReducers({
   guessCountReducer: guessCountReducer,
-  guessArrayReducer: guessArrayReducer
-})
+  guessArrayReducer: guessArrayReducer,
+  targetNumberReducer: targetNumberReducer,
+  newGameReducer: newGameReducer,
+  routing: routerReducer
+});
 
-export default allReducers;
+// export default allReducers;
+module.exports = allReducers;
+// module.exports = initialState;
