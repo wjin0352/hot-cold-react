@@ -7,10 +7,8 @@ const Main = React.createClass({
   render() {
     return (
       <div>
-      {console.log(this.props, 'hi')}
         <Header/>
         <ModalInformationBox/>
-        {React.cloneElement({...this.props}.children, {...this.props})}
       </div>
     )
   }
