@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import ModalInformationBox from './ModalInformationBox';
-import actions from '../actions'
+import GameContainer from '../containers/GameContainer';
+import actions from '../actions';
 
 const Main = React.createClass({
   render() {
@@ -9,6 +10,7 @@ const Main = React.createClass({
       <div>
         <Header/>
         <ModalInformationBox/>
+        <GameContainer/>
       </div>
     )
   }

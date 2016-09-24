@@ -2,7 +2,7 @@ import React from 'react';
 import actions from '../actions';
 import store from '../store';
 
-const NavigationView = ({ onNewGameClick, data }) => {
+const NavigationView = ({ onNewGameClick, game }) => {
   return (
     <div>
       <nav>
