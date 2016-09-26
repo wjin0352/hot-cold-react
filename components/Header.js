@@ -1,5 +1,4 @@
 import React from 'react';
-import NavigationView from './NavigationView';
 import Navigation from '../containers/Navigation';
 
 const Header = React.createClass({

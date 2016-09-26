@@ -11,8 +11,8 @@ const Game = React.createClass({
             <input ref='userGuess' type="text" name="userGuess" id="userGuess" className="text" maxLength="3"  placeholder="Enter your Guess" required/>
             <input type="submit" id="guessButton" className="button" name="submit" value="Guess" onClick={this.props.handleGuess}/>
           </form>
-          <p>Guess #<span id="count">{this.props.guessCount}</span>!</p>
-          <ul id="guessList" className="guessBox clearfix">{this.props.guessList}</ul>
+          <p>Guess #<span id="count">{this.props.guess.guessCount}</span>!</p>
+          <ul id="guessList" className="guessBox clearfix">{this.props.guess.guessArray}</ul>
         </section>
       </div>
     )
