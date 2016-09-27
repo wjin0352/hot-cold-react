@@ -1,33 +1,21 @@
-export function guessCount (guess_count) {
+export function addWin (addWin) {
   return {
-    type: 'GUESS_COUNT',
-    guess_count: guess_count
-  }
-}
-
-export function guessArray (guess_array) {
-  return {
-    type: GUESS_ARRAY,
-    guess_array: guess_array
+    type: 'ADD_WIN',
+    addWin
   }
 };
 
-export function targetNumber (targetNumber) {
+export function newGame (newGame) {
   return {
-    type: TARGET_NUMBER,
-    targetNumber: targetNumber
+    type: 'NEW_GAME',
+    newGame
   }
 };
 
-export function addWins (addWins) {
+export function userGuess (guess) {
   return {
-    type: ADD_WINS,
-    addWins: addWins
-  }
-};
-
-export function newGame () {
-  return {
-    type: NEW_GAME
+    type: 'USER_GUESS',
+    guess,
+    msg
   }
 };

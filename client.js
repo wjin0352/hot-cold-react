@@ -5,19 +5,19 @@ import { render } from 'react-dom';
 // import components
 import Main from './components/Main';
 import Header from './components/Header';
-import Navigation from './components/Navigation';
+import NavigationView from './components/NavigationView';
 import ModalInformationBox from './components/ModalInformationBox';
 import Game from './components/Game';
-import App from './containers/App';
+import GameContainer from './containers/GameContainer';
 // import react router
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import store, { history } from './store';
+import store from './store';
 
 const router = (
   <Provider store={store} >
-    <Router history={history}>
-      <Route path='/' component={App}>
+    <Router history={browserHistory}>
+      <Route path='/' component={Main}>
         <IndexRoute component={Game}></IndexRoute>
       </Route>
     </Router>

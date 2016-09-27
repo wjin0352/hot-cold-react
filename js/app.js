@@ -11,7 +11,7 @@
 //     var guessArray = [];
 //     var repeatGuess = false;
 //   /*-- start new game --*/
-//     newGame();
+//     // newGame();
 
 //   /*-- New game button feature --*/
 //     // $('.new').click(function(){

@@ -1,15 +1,8 @@
 import redux from 'redux';
-import { createStore, compose } from 'redux';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { browserHistory } from 'react-router';
-// import root reducer
-import allReducers from './reducers';
+import { createStore } from 'redux';
 
-console.log(allReducers)
-const store = createStore(allReducers, allReducers.initialState);
-// const store = createStore(allReducers, defaultState);
+import reducers from './reducers/index';
 
-// stores browerHistory into the syncHistory
-export const history = syncHistoryWithStore(browserHistory, store);
+const store = createStore(reducers);
 
 export default store;
