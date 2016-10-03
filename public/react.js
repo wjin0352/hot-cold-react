@@ -23614,7 +23614,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
-	  console.log(state.game);
+	  console.log('state.game is', state.game);
+	  console.log('state.game.currentGame.targetNumber', state.game.currentGame.targetNumber);
 	  return {
 	    guess: state.game
 	  };
@@ -23654,22 +23655,26 @@
 	
 	  handleGuess: function handleGuess(e) {
 	    e.preventDefault();
-	    //   // get user guess through ref attribute as this.refs.refName.value
+	    // get user guess through ref attribute as this.refs.refName.value
 	    var guess = this.refs.userGuess.value;
 	    console.log(guess);
-	    //   // call a method to check user guess against winning number and respond with correct message
-	    //     checkGuess(guess);
-	    //   // call dispatching method with the user guess and return message.
-	    //   this.props.dispatchGuess(guess, msg)
+	
+	    // pass from store through props the random number that was generated to compare with user guess number by calling checkGuess method.
+	
+	    // call checkGuess to check user guess against winning number, respond with correct message, update by pushing user guess to the guessArray
+	    // checkGuess(guess);
+	    // call dispatching method with the user guess and return message.
+	    // this.props.dispatchGuess(guess, msg)
 	  },
-	  checkGuess: function checkGuess(guess) {
-	    var guessNum = parseInt(guess);
-	    //   switch (guessNum) {
-	    //     case ()
-	    //   }
-	    //   return msg;
-	  },
+	  // checkGuess: function (guess) {
+	  //   const guessNum = parseInt(guess);
+	  //   switch (guessNum) {
+	  //     case ()
+	  //   }
+	  //   return msg;
+	  // },
 	  render: function render() {
+	    console.log('winning number is: ', this.props.guess.currentGame.targetNumber);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'game' },

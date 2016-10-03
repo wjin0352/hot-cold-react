@@ -3,22 +3,26 @@ import React from 'react';
 const Game = React.createClass({
   handleGuess: function (e) {
     e.preventDefault();
-  //   // get user guess through ref attribute as this.refs.refName.value
-      const guess = this.refs.userGuess.value;
-      console.log(guess);
-  //   // call a method to check user guess against winning number and respond with correct message
-  //     checkGuess(guess);
-  //   // call dispatching method with the user guess and return message.
-  //   this.props.dispatchGuess(guess, msg)
+    // get user guess through ref attribute as this.refs.refName.value
+    const guess = this.refs.userGuess.value;
+    console.log(guess);
+
+    // pass from store through props the random number that was generated to compare with user guess number by calling checkGuess method.
+
+    // call checkGuess to check user guess against winning number, respond with correct message, update by pushing user guess to the guessArray
+    // checkGuess(guess);
+    // call dispatching method with the user guess and return message.
+    // this.props.dispatchGuess(guess, msg)
   },
-  checkGuess: function (guess) {
-    const guessNum = parseInt(guess);
+  // checkGuess: function (guess) {
+  //   const guessNum = parseInt(guess);
   //   switch (guessNum) {
   //     case ()
   //   }
   //   return msg;
-  },
+  // },
   render: function () {
+    console.log('winning number is: ', this.props.guess.currentGame.targetNumber)
     return (
       <div className='game'>
         <section className="game">
