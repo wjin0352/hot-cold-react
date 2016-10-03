@@ -4,23 +4,10 @@ const Game = React.createClass({
   handleGuess: function (e) {
     e.preventDefault();
     // get user guess through ref attribute as this.refs.refName.value
-    const guess = this.refs.userGuess.value;
-    console.log(guess);
-
-    // pass from store through props the random number that was generated to compare with user guess number by calling checkGuess method.
-
-    // call checkGuess to check user guess against winning number, respond with correct message, update by pushing user guess to the guessArray
-    // checkGuess(guess);
-    // call dispatching method with the user guess and return message.
-    // this.props.dispatchGuess(guess, msg)
+    const playerGuess = this.refs.userGuess.value;
+    // to affect state logic from store we do it in the reducer so make a call to a reducer
+    this.props.dispatchGuess(playerGuess);
   },
-  // checkGuess: function (guess) {
-  //   const guessNum = parseInt(guess);
-  //   switch (guessNum) {
-  //     case ()
-  //   }
-  //   return msg;
-  // },
   render: function () {
     console.log('winning number is: ', this.props.guess.currentGame.targetNumber)
     return (
@@ -31,7 +18,7 @@ const Game = React.createClass({
             <input ref='userGuess' type="text" name="userGuess" id="userGuess" className="text" maxLength="3"  placeholder="Enter your Guess" required/>
             <input type="submit" id="guessButton" className="button" name="submit" value="Guess" />
           </form>
-          <p>Guess #<span id="count">{this.props.guess.currentGame.guessCount}</span>!</p>
+          <p>Guess #<span id="count"> {this.props.guess.currentGame.guessCount}</span>!</p>
           <ul id="guessList" className="guessBox clearfix">{this.props.guess.currentGame.guessArray}</ul>
         </section>
       </div>
@@ -40,3 +27,32 @@ const Game = React.createClass({
 })
 
 export default Game;
+
+
+// checkGuess: function (playerGuess) {
+//     let arrayLength = this.props.guess.currentGame.guessArray.length;
+//     let guesses = this.props.guess.currentGame.guessArray;
+//     let repeatGuess = false;
+//     // const guessNum = parseInt(guess);
+//     if (playerGuess < 0 || playerGuess > 100) {
+//       alert('Stay within 0 - 100 please');
+//     } else if (arrayLength > 0) {
+//       guesses.forEach(function (guess, idx) {
+//         if (playerGuess == guess) {
+//           repeatGuess = true;
+//         };
+//       });
+//     };
+
+//     if (repeatGuess) {
+//       alert('you chose this number already');
+//       repeatGuess = false;
+//       return;
+//       } else {
+
+//       }
+
+//   },
+  // compareAnswer: function () {
+    // return;
+  // },

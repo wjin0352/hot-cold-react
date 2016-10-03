@@ -21696,8 +21696,7 @@
 	function userGuess(guess) {
 	  return {
 	    type: 'USER_GUESS',
-	    guess: guess,
-	    msg: msg
+	    guess: guess
 	  };
 	};
 
@@ -22606,6 +22605,8 @@
 	  value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	var _actions = __webpack_require__(178);
 	
 	var actions = _interopRequireWildcard(_actions);
@@ -22629,31 +22630,110 @@
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
 	  var action = arguments[1];
 	
-	  switch (action.type) {
-	    case 'NEW_GAME':
-	      return Object.assign({}, state, {
-	        currentGame: {
-	          targetNumber: Math.floor(Math.random() * 100) + 1,
-	          guessArray: [],
-	          guessCount: 0,
-	          msg: 'Starting a new Game!',
-	          userGuess: ''
-	        },
-	        games: [{}]
-	      });
-	    case 'USER_GUESS':
-	      return Object.assign({}, state, {
-	        guessArray: [].concat(_toConsumableArray(state.currentGame.guessArray), [action.userGuess]),
-	        guessCount: state.currentGame.guessCount + 1,
-	        userGuess: action.guess,
-	        msg: action.msg
-	      });
-	    default:
-	      return state;
-	  }
+	  var _ret = function () {
+	    switch (action.type) {
+	      case 'NEW_GAME':
+	        return {
+	          v: Object.assign({}, state, {
+	            currentGame: {
+	              targetNumber: Math.floor(Math.random() * 100) + 1,
+	              guessArray: [],
+	              guessCount: 0,
+	              msg: 'Starting a new Game!',
+	              userGuess: ''
+	            },
+	            games: [{}]
+	          })
+	        };
+	        break;
+	      case 'USER_GUESS':
+	        var playerGuess = action.guess;
+	        var guessArrayLength = state.currentGame.guessArray.length;
+	        var guessArray = state.currentGame.guessArray;
+	        var answer = state.currentGame.targetNumber;
+	        var repeatGuess = false;
+	        var msg = '';
+	        var comparision = Math.abs(answer - playerGuess);
+	        // check playerGuess to know if its within 0-100
+	        if (playerGuess < 0 || playerGuess > 100) {
+	          alert('Stay within 0-100 please');
+	        } else if (guessArrayLength > 0) {
+	          guessArray.forEach(function (obj, idx) {
+	            if (playerGuess == obj) {
+	              repeatGuess = true;
+	            };
+	          });
+	        };
+	        // check playerGuess for repeat guess
+	        if (repeatGuess) {
+	          alert('Sorry you already chose this number');
+	          repeatGuess = false;
+	          return {
+	            v: void 0
+	          };
+	        }
+	        // compare the playerGuess to the correct answer
+	        if (answer == playerGuess) {
+	          msg = 'Great job, you won!';
+	        } else if (comparision <= 10) {
+	          msg = 'hot';
+	        } else if (comparision <= 20) {
+	          msg = 'getting warmer';
+	        } else if (comparision <= 30) {
+	          msg = 'warm';
+	        } else if (comparision <= 40) {
+	          msg = 'cold';
+	        } else if (comparision <= 50) {
+	          msg = 'ice cold';
+	        } else if (comparision > 50) {
+	          msg = 'frozen tundra';
+	        };
+	        // if not repeat guess and within limits push into guessArray
+	        // create new state and return to user
+	
+	        // return Object.assign({}, state, {
+	        //   state.currentGame.guessArray: [...state.currentGame.guessArray, action.userGuess],
+	        //   state.currentGame.guessCount: state.currentGame.guessCount + 1,
+	        //   state.currentGame.userGuess: action.playerGuess,
+	        //   state.currentGame.msg
+	        // })
+	        return {
+	          v: Object.assign({}, state, {
+	            currentGame: {
+	              targetNumber: answer,
+	              guessArray: [].concat(_toConsumableArray(guessArray), [action.guess]),
+	              guessCount: state.currentGame.guessCount + 1,
+	              msg: msg,
+	              userGuess: playerGuess
+	            },
+	            games: [{}]
+	          })
+	        };
+	        break;
+	      default:
+	        return {
+	          v: state
+	        };
+	    }
+	  }();
+	
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	};
 	
 	exports.default = game;
+	
+	// {
+	//   currentGame: {
+	//     targetNumber: Math.floor(Math.random() * 100) + 1,
+	//     guessArray: [],
+	//     guessCount: 0,
+	//     msg: '',
+	//     userGuess: ''
+	//   },
+	//   games: [
+	//     {}
+	//   ]
+	// };
 
 /***/ },
 /* 196 */
@@ -23615,7 +23695,6 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  console.log('state.game is', state.game);
-	  console.log('state.game.currentGame.targetNumber', state.game.currentGame.targetNumber);
 	  return {
 	    guess: state.game
 	  };
@@ -23623,9 +23702,8 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    dispatchGuess: function dispatchGuess(guess, msg) {
-	
-	      dispatch(actions.userGuess(guess, msg));
+	    dispatchGuess: function dispatchGuess(playerGuess) {
+	      dispatch(actions.userGuess(playerGuess));
 	    }
 	  };
 	};
@@ -23656,23 +23734,10 @@
 	  handleGuess: function handleGuess(e) {
 	    e.preventDefault();
 	    // get user guess through ref attribute as this.refs.refName.value
-	    var guess = this.refs.userGuess.value;
-	    console.log(guess);
-	
-	    // pass from store through props the random number that was generated to compare with user guess number by calling checkGuess method.
-	
-	    // call checkGuess to check user guess against winning number, respond with correct message, update by pushing user guess to the guessArray
-	    // checkGuess(guess);
-	    // call dispatching method with the user guess and return message.
-	    // this.props.dispatchGuess(guess, msg)
+	    var playerGuess = this.refs.userGuess.value;
+	    // to affect state logic from store we do it in the reducer so make a call to a reducer
+	    this.props.dispatchGuess(playerGuess);
 	  },
-	  // checkGuess: function (guess) {
-	  //   const guessNum = parseInt(guess);
-	  //   switch (guessNum) {
-	  //     case ()
-	  //   }
-	  //   return msg;
-	  // },
 	  render: function render() {
 	    console.log('winning number is: ', this.props.guess.currentGame.targetNumber);
 	    return _react2.default.createElement(
@@ -23699,6 +23764,7 @@
 	          _react2.default.createElement(
 	            'span',
 	            { id: 'count' },
+	            ' ',
 	            this.props.guess.currentGame.guessCount
 	          ),
 	          '!'
@@ -23714,6 +23780,34 @@
 	});
 	
 	exports.default = Game;
+	
+	// checkGuess: function (playerGuess) {
+	//     let arrayLength = this.props.guess.currentGame.guessArray.length;
+	//     let guesses = this.props.guess.currentGame.guessArray;
+	//     let repeatGuess = false;
+	//     // const guessNum = parseInt(guess);
+	//     if (playerGuess < 0 || playerGuess > 100) {
+	//       alert('Stay within 0 - 100 please');
+	//     } else if (arrayLength > 0) {
+	//       guesses.forEach(function (guess, idx) {
+	//         if (playerGuess == guess) {
+	//           repeatGuess = true;
+	//         };
+	//       });
+	//     };
+	
+	//     if (repeatGuess) {
+	//       alert('you chose this number already');
+	//       repeatGuess = false;
+	//       return;
+	//       } else {
+	
+	//       }
+	
+	//   },
+	// compareAnswer: function () {
+	// return;
+	// },
 
 /***/ },
 /* 210 */

@@ -15,7 +15,6 @@ export function newGame (newGame) {
 export function userGuess (guess) {
   return {
     type: 'USER_GUESS',
-    guess,
-    msg
+    guess
   }
 };
