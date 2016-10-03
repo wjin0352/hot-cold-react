@@ -23614,7 +23614,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
-	  console.log(state);
+	  console.log(state.game);
 	  return {
 	    guess: state.game
 	  };
@@ -23652,16 +23652,18 @@
 	var Game = _react2.default.createClass({
 	  displayName: 'Game',
 	
-	  handleGuess: function handleGuess() {
+	  handleGuess: function handleGuess(e) {
+	    e.preventDefault();
 	    //   // get user guess through ref attribute as this.refs.refName.value
-	    //     const guess = this.refs.userGuess.value;
+	    var guess = this.refs.userGuess.value;
+	    console.log(guess);
 	    //   // call a method to check user guess against winning number and respond with correct message
 	    //     checkGuess(guess);
 	    //   // call dispatching method with the user guess and return message.
 	    //   this.props.dispatchGuess(guess, msg)
-	    // },
-	    // checkGuess: function (guess) {
-	    //   const guessNum = parseInt(guess);
+	  },
+	  checkGuess: function checkGuess(guess) {
+	    var guessNum = parseInt(guess);
 	    //   switch (guessNum) {
 	    //     case ()
 	    //   }
@@ -23681,9 +23683,9 @@
 	        ),
 	        _react2.default.createElement(
 	          'form',
-	          null,
+	          { onSubmit: this.handleGuess },
 	          _react2.default.createElement('input', { ref: 'userGuess', type: 'text', name: 'userGuess', id: 'userGuess', className: 'text', maxLength: '3', placeholder: 'Enter your Guess', required: true }),
-	          _react2.default.createElement('input', { type: 'submit', id: 'guessButton', className: 'button', name: 'submit', value: 'Guess', onClick: this.handleGuess })
+	          _react2.default.createElement('input', { type: 'submit', id: 'guessButton', className: 'button', name: 'submit', value: 'Guess' })
 	        ),
 	        _react2.default.createElement(
 	          'p',

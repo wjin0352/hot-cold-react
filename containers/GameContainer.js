@@ -6,7 +6,7 @@ import Game from '../components/Game';
 import initialState from '../reducers';
 
 const mapStateToProps = (state) => {
-  console.log(state)
+  console.log(state.game)
   return {
     guess: state.game
   }
