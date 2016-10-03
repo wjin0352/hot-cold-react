@@ -27,32 +27,3 @@ const Game = React.createClass({
 })
 
 export default Game;
-
-
-// checkGuess: function (playerGuess) {
-//     let arrayLength = this.props.guess.currentGame.guessArray.length;
-//     let guesses = this.props.guess.currentGame.guessArray;
-//     let repeatGuess = false;
-//     // const guessNum = parseInt(guess);
-//     if (playerGuess < 0 || playerGuess > 100) {
-//       alert('Stay within 0 - 100 please');
-//     } else if (arrayLength > 0) {
-//       guesses.forEach(function (guess, idx) {
-//         if (playerGuess == guess) {
-//           repeatGuess = true;
-//         };
-//       });
-//     };
-
-//     if (repeatGuess) {
-//       alert('you chose this number already');
-//       repeatGuess = false;
-//       return;
-//       } else {
-
-//       }
-
-//   },
-  // compareAnswer: function () {
-    // return;
-  // },

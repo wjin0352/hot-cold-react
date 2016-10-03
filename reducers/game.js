@@ -69,15 +69,7 @@ const game = function (state = initialState, action) {
       } else if (comparision > 50) {
         msg = 'frozen tundra';
       };
-      // if not repeat guess and within limits push into guessArray
       // create new state and return to user
-
-      // return Object.assign({}, state, {
-      //   state.currentGame.guessArray: [...state.currentGame.guessArray, action.userGuess],
-      //   state.currentGame.guessCount: state.currentGame.guessCount + 1,
-      //   state.currentGame.userGuess: action.playerGuess,
-      //   state.currentGame.msg
-      // })
       return Object.assign({}, state, {
         currentGame: {
           targetNumber: answer,
@@ -97,16 +89,3 @@ const game = function (state = initialState, action) {
 }
 
 export default game;
-
-// {
-//   currentGame: {
-//     targetNumber: Math.floor(Math.random() * 100) + 1,
-//     guessArray: [],
-//     guessCount: 0,
-//     msg: '',
-//     userGuess: ''
-//   },
-//   games: [
-//     {}
-//   ]
-// };

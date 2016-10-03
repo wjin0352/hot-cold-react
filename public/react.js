@@ -22688,15 +22688,7 @@
 	        } else if (comparision > 50) {
 	          msg = 'frozen tundra';
 	        };
-	        // if not repeat guess and within limits push into guessArray
 	        // create new state and return to user
-	
-	        // return Object.assign({}, state, {
-	        //   state.currentGame.guessArray: [...state.currentGame.guessArray, action.userGuess],
-	        //   state.currentGame.guessCount: state.currentGame.guessCount + 1,
-	        //   state.currentGame.userGuess: action.playerGuess,
-	        //   state.currentGame.msg
-	        // })
 	        return {
 	          v: Object.assign({}, state, {
 	            currentGame: {
@@ -22721,19 +22713,6 @@
 	};
 	
 	exports.default = game;
-	
-	// {
-	//   currentGame: {
-	//     targetNumber: Math.floor(Math.random() * 100) + 1,
-	//     guessArray: [],
-	//     guessCount: 0,
-	//     msg: '',
-	//     userGuess: ''
-	//   },
-	//   games: [
-	//     {}
-	//   ]
-	// };
 
 /***/ },
 /* 196 */
@@ -23780,34 +23759,6 @@
 	});
 	
 	exports.default = Game;
-	
-	// checkGuess: function (playerGuess) {
-	//     let arrayLength = this.props.guess.currentGame.guessArray.length;
-	//     let guesses = this.props.guess.currentGame.guessArray;
-	//     let repeatGuess = false;
-	//     // const guessNum = parseInt(guess);
-	//     if (playerGuess < 0 || playerGuess > 100) {
-	//       alert('Stay within 0 - 100 please');
-	//     } else if (arrayLength > 0) {
-	//       guesses.forEach(function (guess, idx) {
-	//         if (playerGuess == guess) {
-	//           repeatGuess = true;
-	//         };
-	//       });
-	//     };
-	
-	//     if (repeatGuess) {
-	//       alert('you chose this number already');
-	//       repeatGuess = false;
-	//       return;
-	//       } else {
-	
-	//       }
-	
-	//   },
-	// compareAnswer: function () {
-	// return;
-	// },
 
 /***/ },
 /* 210 */
